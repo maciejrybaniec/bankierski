@@ -1,0 +1,24 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    "transform-flow-strip-types",
+    ["module-alias", [{
+      "src": "./pages",
+      "expose": "Pages",
+    }, {
+      "src": "./components",
+      "expose": "Components",
+    }, {
+      "src": "./styles",
+      "expose": "Styles",
+    }, {
+      "src": "./store",
+      "expose": "Store",
+    }, {
+      "src": "./middleware",
+      "expose": "Middleware"
+    }]]
+  ]
+}
