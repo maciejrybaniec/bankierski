@@ -26,6 +26,7 @@ const Container = (props: PropsType): React.Element<*> => {
           margin: 0 auto;
           padding: 0 15px;
           width: 100%;
+          box-sizing: border-box;
         }
 
         @media (min-width: ${breakpoints.small}) {
