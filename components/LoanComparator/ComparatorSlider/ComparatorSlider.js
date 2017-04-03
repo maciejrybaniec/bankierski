@@ -26,9 +26,9 @@ const ComparatorSlider = (props: PropsType): React.Element<*> => {
   return (
     <div className="comparator-slider">
       <style jsx global>{`
-        .rangeslider {
-          position: relative;
-          background-color: ${colors.white};
+      .rangeslider {
+        position: relative;
+        background-color: ${colors.white};
       }
 
       .rangeslider-horizontal {

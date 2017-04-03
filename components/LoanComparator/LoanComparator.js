@@ -8,6 +8,9 @@ import React from 'react';
 import { compose, withState, withHandlers } from 'recompose';
 
 import Container from 'Components/Container';
+import Button from 'Components/Button';
+import SearchResults from 'Components/SearchResults';
+
 import AmountSlider from './AmountSlider';
 import DaysSlider from './DaysSlider';
 import ComparatorHeader from './ComparatorHeader';
@@ -15,6 +18,7 @@ import ComparatorHeader from './ComparatorHeader';
 const enhance = compose(
   withState('amount', 'setAmount', 1000),
   withState('days', 'setDays', 10),
+  withState('searchMode', 'setSearchMode', false),
   withHandlers({
     onAmountChange: props => (value: number, event: SyntheticEvent) => {
       const { setAmount } = props;
@@ -24,8 +28,17 @@ const enhance = compose(
       const { setDays } = props;
       setDays(value);
     },
+    onSearch: props => () => {
+      const { setSearchMode } = props;
+      setSearchMode(true);
+    }
   })
 );
+
+type PropsType = {
+  days: number,
+  amount: number,
+};
 
 /**
  * Loan comparator component.
@@ -33,7 +46,7 @@ const enhance = compose(
  * @returns {ReactElement}
  */
 const LoanComparator = (props): React.Element<*> => {
-  const { amount, days, onAmountChange, onDaysChange } = props;
+  const { amount, days, searchMode, onAmountChange, onDaysChange, onSearch } = props;
   return (
     <div className="loan-comparator">
       <style jsx>{`
@@ -53,7 +66,13 @@ const LoanComparator = (props): React.Element<*> => {
             <AmountSlider amount={amount} onAmountChange={onAmountChange} />
             <DaysSlider days={days} onDaysChange={onDaysChange} />
           </section>
+          <Button onClick={onSearch}>Porównaj</Button>
         </div>
+        {searchMode ? (
+          <div className="loan-comparator__results">
+            <SearchResults amount={amount} days={days} />
+          </div>
+        ) : null}
       </Container>
     </div>
   );
